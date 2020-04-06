@@ -497,11 +497,9 @@ extension CameraView {
     
     private func submit() {
         
-        let photoQuality = configuration.photoQuality
-        
         if let photo = cameraManager.photo {
             // 保存图片
-            cameraManager.saveToDisk(image: photo, compressionQuality: photoQuality) { path, size in
+            cameraManager.saveToDisk(image: photo) { path, size in
                 self.onCapturePhoto?(path, size, Int(photo.size.width), Int(photo.size.height))
             }
         }
@@ -510,7 +508,7 @@ extension CameraView {
                 return
             }
             // 保存视频截图
-            cameraManager.saveToDisk(image: photo, compressionQuality: photoQuality) { path, size in
+            cameraManager.saveToDisk(image: photo) { path, size in
                 self.onRecordVideo?(
                     cameraManager.videoPath,
                     videoData.length,
