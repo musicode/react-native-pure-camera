@@ -51,7 +51,7 @@ public class CameraView: UIView {
     
     private var configuration: CameraViewConfiguration!
     
-    private var cameraManager = CameraManager()
+    private var cameraManager = CameraManager.shared
     
     private var progressAnimation: CABasicAnimation!
     

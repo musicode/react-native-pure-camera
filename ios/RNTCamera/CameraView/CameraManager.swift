@@ -4,7 +4,9 @@ import AVFoundation
 
 // 支持拍照，录视频
 
-class CameraManager : NSObject {
+@objc public class CameraManager : NSObject {
+    
+    @objc public static let shared: CameraManager = CameraManager()
     
     // 图片保存的目录
     var photoDir = ""
@@ -134,6 +136,12 @@ class CameraManager : NSObject {
     // MARK: - 回调
     //
     
+    @objc public var onPermissionsGranted: (() -> Void)?
+    
+    @objc public var onPermissionsDenied: (() -> Void)?
+    
+    @objc public var onPermissionsNotGranted: (() -> Void)?
+    
     var onDeviceReady: (() -> Void)?
     
     var onFlashModeChange: (() -> Void)?
@@ -141,12 +149,6 @@ class CameraManager : NSObject {
     var onCameraPositionChange: (() -> Void)?
     
     var onZoomFactorChange: (() -> Void)?
-    
-    var onPermissionsGranted: (() -> Void)?
-    
-    var onPermissionsDenied: (() -> Void)?
-    
-    var onPermissionsNotGranted: (() -> Void)?
     
     var onRecordVideoDurationLessThanMinDuration: (() -> Void)?
     
@@ -178,7 +180,7 @@ class CameraManager : NSObject {
 extension CameraManager {
     
     // 申请权限
-    func requestPermissions() -> Bool {
+    @objc public func requestPermissions() -> Bool {
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
@@ -546,7 +548,7 @@ extension CameraManager {
 @available(iOS 10.0, *)
 extension CameraManager: AVCapturePhotoCaptureDelegate {
     
-    func photoOutput(_ output: AVCapturePhotoOutput,
+    public func photoOutput(_ output: AVCapturePhotoOutput,
                      didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?,
                      previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?,
                      resolvedSettings: AVCaptureResolvedPhotoSettings,
