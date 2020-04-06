@@ -1,7 +1,7 @@
 
 import UIKit
 
-public protocol CameraViewDelegate {
+@objc public protocol CameraViewDelegate {
     
     // 点击退出按钮
     func cameraViewDidExit(_ viewController: CameraViewController)
@@ -15,16 +15,4 @@ public protocol CameraViewDelegate {
     // 录制视频时间太短
     func cameraViewDidRecordDurationLessThanMinDuration(_ viewController: CameraViewController)
 
-}
-
-public extension CameraViewDelegate {
-    
-    func cameraViewDidExit(_ viewController: CameraViewController) { }
-
-    func cameraViewDidCapturePhoto(_ viewController: CameraViewController, photoPath: String, photoSize: Int, photoWidth: Int, photoHeight: Int) { }
-    
-    func cameraViewDidRecordVideo(_ viewController: CameraViewController, videoPath: String, videoSize: Int, videoDuration: Int, photoPath: String, photoSize: Int, photoWidth: Int, photoHeight: Int) { }
-
-    func cameraViewDidRecordDurationLessThanMinDuration(_ viewController: CameraViewController) { }
- 
 }

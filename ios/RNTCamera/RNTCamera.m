@@ -1,7 +1,50 @@
 #import "RNTCamera.h"
+#import <React/RCTConvert.h>
 #import "react_native_pure_camera-Swift.h"
 
+@interface RNTCamera()<CameraViewDelegate>
+
+@end
+
 @implementation RNTCamera
+
+- (void)cameraViewDidExit:(CameraViewController *)viewController {
+    [viewController dismissViewControllerAnimated:true completion:nil];
+    self.reject(@"-1", @"exit", nil);
+}
+
+- (void)cameraViewDidRecordDurationLessThanMinDuration:(CameraViewController *)viewController {
+    
+}
+
+- (void)cameraViewDidCapturePhoto:(CameraViewController *)viewController photoPath:(NSString *)photoPath photoSize:(NSInteger)photoSize photoWidth:(NSInteger)photoWidth photoHeight:(NSInteger)photoHeight {
+    [viewController dismissViewControllerAnimated:true completion:nil];
+    self.resolve(@{
+        @"photo": @{
+                @"path": photoPath,
+                @"size": @(photoSize),
+                @"width": @(photoWidth),
+                @"height": @(photoHeight),
+        }
+    });
+}
+
+- (void)cameraViewDidRecordVideo:(CameraViewController *)viewController videoPath:(NSString *)videoPath videoSize:(NSInteger)videoSize videoDuration:(NSInteger)videoDuration photoPath:(NSString *)photoPath photoSize:(NSInteger)photoSize photoWidth:(NSInteger)photoWidth photoHeight:(NSInteger)photoHeight {
+    [viewController dismissViewControllerAnimated:true completion:nil];
+    self.resolve(@{
+        @"video": @{
+                @"path": videoPath,
+                @"size": @(videoSize),
+                @"duration": @(videoDuration),
+        },
+        @"photo": @{
+                @"path": photoPath,
+                @"size": @(photoSize),
+                @"width": @(photoWidth),
+                @"height": @(photoHeight),
+        }
+    });
+}
 
 RCT_EXPORT_MODULE(RNTCamera);
 
@@ -9,58 +52,45 @@ RCT_EXPORT_METHOD(open:(NSDictionary*)options
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject) {
 
-//    self.resolve = resolve;
-//    self.reject = reject;
-//
-//    PhotoPickerManager.shared.onPermissionsDenied = ^ () {
-//        self.reject(@"2", @"you denied the requested permissions.", nil);
-//    };
-//
-//    PhotoPickerManager.shared.onPermissionsNotGranted = ^ () {
-//        self.reject(@"1", @"has no permissions", nil);
-//    };
-//
-//    [PhotoPickerManager.shared requestPermissionsWithCallback:^ () {
-//
-//        PhotoPickerViewController *controller = [PhotoPickerViewController new];
-//
-//        PhotoPickerConfiguration *configuration = [PhotoPickerConfiguration new];
-//
-//        configuration.countable = [RCTConvert BOOL:options[@"countable"]];
-//        configuration.maxSelectCount = [RCTConvert int:options[@"maxSelectCount"]];
-//        configuration.rawButtonVisible = [RCTConvert BOOL:options[@"rawButtonVisible"]];
-//
-//        int imageMinWidth = [RCTConvert int:options[@"imageMinWidth"]];
-//        if (imageMinWidth > 0) {
-//            configuration.imageMinWidth = imageMinWidth;
-//        }
-//
-//        int imageMinHeight = [RCTConvert int:options[@"imageMinHeight"]];
-//        if (imageMinHeight > 0) {
-//            configuration.imageMinHeight = imageMinHeight;
-//        }
-//
-//        NSString *cancelButtonTitle = [RCTConvert NSString:options[@"cancelButtonTitle"]];
-//        if (cancelButtonTitle != nil) {
-//            configuration.cancelButtonTitle = cancelButtonTitle;
-//        }
-//
-//        NSString *rawButtonTitle = [RCTConvert NSString:options[@"rawButtonTitle"]];
-//        if (rawButtonTitle != nil) {
-//            configuration.rawButtonTitle = rawButtonTitle;
-//        }
-//
-//        NSString *submitButtonTitle = [RCTConvert NSString:options[@"submitButtonTitle"]];
-//        if (submitButtonTitle != nil) {
-//            configuration.submitButtonTitle = submitButtonTitle;
-//        }
-//
-//        controller.delegate = self;
-//        controller.configuration = configuration;
-//
-//        [controller show];
-//
-//    }];
+    self.resolve = resolve;
+    self.reject = reject;
+
+    CameraViewController *controller = [CameraViewController new];
+
+    CameraViewConfiguration *configuration = [CameraViewConfiguration new];
+
+    NSString *captureMode = [RCTConvert NSString:options[@"captureMode"]];
+    if (captureMode != nil) {
+        if ([captureMode isEqualToString:@"photo"]) {
+            configuration.captureMode = CaptureModePhoto;
+        }
+        else if ([captureMode isEqualToString:@"video"]) {
+            configuration.captureMode = CaptureModeVideo;
+        }
+        else {
+            configuration.captureMode = CaptureModePhoto_video;
+        }
+    }
+    
+    NSString *guideLabelTitle = [RCTConvert NSString:options[@"guideLabelTitle"]];
+    if (guideLabelTitle != nil) {
+        configuration.guideLabelTitle = guideLabelTitle;
+    }
+    
+    int videoMinDuration = [RCTConvert int:options[@"videoMinDuration"]];
+    if (videoMinDuration > 0) {
+        configuration.videoMinDuration = videoMinDuration;
+    }
+    
+    int videoMaxDuration = [RCTConvert int:options[@"videoMaxDuration"]];
+    if (videoMaxDuration > 0) {
+        configuration.videoMinDuration = videoMaxDuration;
+    }
+
+    controller.delegate = self;
+    controller.configuration = configuration;
+
+    [controller show];
 
 }
 

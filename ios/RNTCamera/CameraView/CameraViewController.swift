@@ -3,8 +3,8 @@ import UIKit
 
 public class CameraViewController: UIViewController {
     
-    public var configuration: CameraViewConfiguration!
-    public var delegate: CameraViewDelegate!
+    @objc public var configuration: CameraViewConfiguration!
+    @objc public var delegate: CameraViewDelegate!
     
     private var cameraView: CameraView!
     
@@ -48,6 +48,14 @@ public class CameraViewController: UIViewController {
         else {
             cameraView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         }
+    }
+    
+    @objc public func show() {
+
+        DispatchQueue.main.async {
+            UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: true, completion: nil)
+        }
+        
     }
     
 }

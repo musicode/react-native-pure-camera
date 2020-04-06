@@ -1,5 +1,5 @@
 
-public enum CaptureMode {
+@objc public enum CaptureMode: Int {
     
     case photo;
     

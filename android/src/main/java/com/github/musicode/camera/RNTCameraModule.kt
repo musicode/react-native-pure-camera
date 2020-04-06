@@ -1,20 +1,12 @@
 package com.github.musicode.camera
 
 import android.app.Activity
-import android.widget.ImageView
-import com.facebook.react.ReactActivity
+import com.facebook.react.bridge.*
 
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.modules.core.PermissionAwareActivity
-import com.github.herokotlin.photopicker.PhotoPickerActivity
-import com.github.herokotlin.photopicker.PhotoPickerCallback
-import com.github.herokotlin.photopicker.PhotoPickerConfiguration
-import com.github.herokotlin.photopicker.model.PickedAsset
+import com.github.herokotlin.cameraview.CameraViewActivity
+import com.github.herokotlin.cameraview.CameraViewCallback
+import com.github.herokotlin.cameraview.CameraViewConfiguration
+import com.github.herokotlin.cameraview.enum.CaptureMode
 
 class RNTCameraModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -25,68 +17,99 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
     @ReactMethod
     fun open(options: ReadableMap, promise: Promise) {
 
-        val configuration = object : PhotoPickerConfiguration() {
-            override fun loadAsset(imageView: ImageView, url: String, loading: Int, error: Int, onComplete: (Boolean) -> Unit) {
-                loader.invoke(imageView, url, loading, error, onComplete)
-            }
+        val configuration = object: CameraViewConfiguration() {
+
         }
 
-        configuration.countable = options.getBoolean("countable")
-        configuration.maxSelectCount = options.getInt("maxSelectCount")
-        configuration.rawButtonVisible = options.getBoolean("rawButtonVisible")
-
-        if (options.hasKey("imageMinWidth") && options.getInt("imageMinWidth") > 0) {
-            configuration.imageMinWidth = options.getInt("imageMinWidth")
-        }
-        if (options.hasKey("imageMinHeight") && options.getInt("imageMinHeight") > 0) {
-            configuration.imageMinHeight = options.getInt("imageMinHeight")
-        }
-        if (options.hasKey("cancelButtonTitle")) {
-            configuration.cancelButtonTitle = options.getString("cancelButtonTitle") as String
-        }
-        if (options.hasKey("rawButtonTitle")) {
-            configuration.rawButtonTitle = options.getString("rawButtonTitle") as String
-        }
-        if (options.hasKey("submitButtonTitle")) {
-            configuration.submitButtonTitle = options.getString("submitButtonTitle") as String
-        }
-
-        val callback = object : PhotoPickerCallback {
-
-            override fun onCancel(activity: Activity) {
-                activity.finish()
-                promise.reject("-1", "cancel")
-            }
-
-            override fun onSubmit(activity: Activity, assetList: List<PickedAsset>) {
-
-                activity.finish()
-
-                val array = Arguments.createArray()
-
-                for (i in assetList.indices) {
-                    val map = Arguments.createMap()
-                    val (path, _, width, height, size, isVideo, isRaw) = assetList[i]
-
-                    map.putString("path", path)
-                    map.putInt("size", size)
-                    map.putInt("width", width)
-                    map.putInt("height", height)
-                    map.putBoolean("isVideo", isVideo)
-                    map.putBoolean("isRaw", isRaw)
-
-                    array.pushMap(map)
+        if (options.hasKey("captureMode")) {
+            configuration.captureMode = when (options.getString("captureMode") as String) {
+                "photo" -> {
+                    CaptureMode.PHOTO
                 }
+                "video" -> {
+                    CaptureMode.VIDEO
+                }
+                else -> {
+                    CaptureMode.PHOTO_VIDEO
+                }
+            }
+        }
 
-                promise.resolve(array)
+        if (options.hasKey("guideLabelTitle")) {
+            configuration.guideLabelTitle = options.getString("guideLabelTitle") as String
+        }
+
+        if (options.hasKey("videoMinDuration")) {
+            configuration.videoMinDuration = options.getInt("videoMinDuration").toLong()
+        }
+
+        if (options.hasKey("videoMaxDuration")) {
+            configuration.videoMaxDuration = options.getInt("videoMaxDuration").toLong()
+        }
+
+        val callback = object: CameraViewCallback {
+            override fun onExit(activity: Activity) {
+                activity.finish()
+            }
+
+            override fun onCapturePhoto(
+                    activity: Activity,
+                    photoPath: String,
+                    photoSize: Long,
+                    photoWidth: Int,
+                    photoHeight: Int
+            ) {
+
+                val map = Arguments.createMap()
+
+                val photo = Arguments.createMap()
+                photo.putString("path", photoPath)
+                photo.putInt("size", photoSize.toInt())
+                photo.putInt("width", photoWidth)
+                photo.putInt("height", photoHeight)
+
+                map.putMap("photo", photo)
+
+                promise.resolve(map)
+
+            }
+
+            override fun onRecordVideo(
+                    activity: Activity,
+                    videoPath: String,
+                    videoSize: Long,
+                    videoDuration: Int,
+                    photoPath: String,
+                    photoSize: Long,
+                    photoWidth: Int,
+                    photoHeight: Int
+            ) {
+
+                val map = Arguments.createMap()
+
+                val video = Arguments.createMap()
+                video.putString("path", videoPath)
+                video.putInt("size", videoSize.toInt())
+                video.putInt("duration", videoDuration)
+
+                val photo = Arguments.createMap()
+                photo.putString("path", photoPath)
+                photo.putInt("size", photoSize.toInt())
+                photo.putInt("width", photoWidth)
+                photo.putInt("height", photoHeight)
+
+                map.putMap("video", video)
+                map.putMap("photo", photo)
+
+                promise.resolve(map)
 
             }
         }
 
-        PhotoPickerActivity.configuration = configuration
-        PhotoPickerActivity.callback = callback
+        CameraViewActivity.configuration = configuration
+        CameraViewActivity.callback = callback
 
-        PhotoPickerActivity.newInstance(reactContext.currentActivity!!)
+        CameraViewActivity.newInstance(reactContext.currentActivity!!)
 
     }
 

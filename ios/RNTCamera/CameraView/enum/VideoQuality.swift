@@ -1,5 +1,5 @@
 
-public enum VideoQuality {
+@objc public enum VideoQuality: Int {
     
     // AVCaptureSession.Preset.vga640x480
     case p480;
