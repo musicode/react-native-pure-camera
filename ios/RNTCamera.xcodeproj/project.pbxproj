@@ -1,0 +1,363 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9DE63355243A2539002F56FC /* RNTCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63354243A2539002F56FC /* RNTCamera.m */; };
+		9DE63356243A2539002F56FC /* RNTCamera.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9DE63353243A2539002F56FC /* RNTCamera.h */; };
+		9DE63369243AE2CF002F56FC /* CameraViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6335D243AE2CF002F56FC /* CameraViewDelegate.swift */; };
+		9DE6336A243AE2CF002F56FC /* CameraViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6335E243AE2CF002F56FC /* CameraViewConfiguration.swift */; };
+		9DE6336B243AE2CF002F56FC /* VideoQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63360243AE2CF002F56FC /* VideoQuality.swift */; };
+		9DE6336C243AE2CF002F56FC /* CaptureMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63361243AE2CF002F56FC /* CaptureMode.swift */; };
+		9DE6336D243AE2CF002F56FC /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63362243AE2CF002F56FC /* CameraViewController.swift */; };
+		9DE6336E243AE2CF002F56FC /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63363243AE2CF002F56FC /* CameraView.swift */; };
+		9DE6336F243AE2CF002F56FC /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63365243AE2CF002F56FC /* FocusView.swift */; };
+		9DE63370243AE2CF002F56FC /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63366243AE2CF002F56FC /* PreviewView.swift */; };
+		9DE63371243AE2CF002F56FC /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63367243AE2CF002F56FC /* CaptureView.swift */; };
+		9DE63372243AE2CF002F56FC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63368243AE2CF002F56FC /* CameraManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9DE6334E243A2539002F56FC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				9DE63356243A2539002F56FC /* RNTCamera.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9DE63350243A2539002F56FC /* libRNTCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTCamera.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DE63353243A2539002F56FC /* RNTCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTCamera.h; sourceTree = "<group>"; };
+		9DE63354243A2539002F56FC /* RNTCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTCamera.m; sourceTree = "<group>"; };
+		9DE6335D243AE2CF002F56FC /* CameraViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewDelegate.swift; sourceTree = "<group>"; };
+		9DE6335E243AE2CF002F56FC /* CameraViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewConfiguration.swift; sourceTree = "<group>"; };
+		9DE63360243AE2CF002F56FC /* VideoQuality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoQuality.swift; sourceTree = "<group>"; };
+		9DE63361243AE2CF002F56FC /* CaptureMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureMode.swift; sourceTree = "<group>"; };
+		9DE63362243AE2CF002F56FC /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		9DE63363243AE2CF002F56FC /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		9DE63365243AE2CF002F56FC /* FocusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		9DE63366243AE2CF002F56FC /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		9DE63367243AE2CF002F56FC /* CaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
+		9DE63368243AE2CF002F56FC /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		9DE63373243AE344002F56FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9DE6334D243A2539002F56FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9DE63347243A2539002F56FC = {
+			isa = PBXGroup;
+			children = (
+				9DE63352243A2539002F56FC /* RNTCamera */,
+				9DE63351243A2539002F56FC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9DE63351243A2539002F56FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9DE63350243A2539002F56FC /* libRNTCamera.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9DE63352243A2539002F56FC /* RNTCamera */ = {
+			isa = PBXGroup;
+			children = (
+				9DE63353243A2539002F56FC /* RNTCamera.h */,
+				9DE63354243A2539002F56FC /* RNTCamera.m */,
+				9DE6335C243AE2CF002F56FC /* CameraView */,
+				9DE63373243AE344002F56FC /* Assets.xcassets */,
+			);
+			path = RNTCamera;
+			sourceTree = "<group>";
+		};
+		9DE6335C243AE2CF002F56FC /* CameraView */ = {
+			isa = PBXGroup;
+			children = (
+				9DE6335D243AE2CF002F56FC /* CameraViewDelegate.swift */,
+				9DE6335E243AE2CF002F56FC /* CameraViewConfiguration.swift */,
+				9DE6335F243AE2CF002F56FC /* enum */,
+				9DE63362243AE2CF002F56FC /* CameraViewController.swift */,
+				9DE63363243AE2CF002F56FC /* CameraView.swift */,
+				9DE63364243AE2CF002F56FC /* view */,
+				9DE63368243AE2CF002F56FC /* CameraManager.swift */,
+			);
+			path = CameraView;
+			sourceTree = "<group>";
+		};
+		9DE6335F243AE2CF002F56FC /* enum */ = {
+			isa = PBXGroup;
+			children = (
+				9DE63360243AE2CF002F56FC /* VideoQuality.swift */,
+				9DE63361243AE2CF002F56FC /* CaptureMode.swift */,
+			);
+			path = enum;
+			sourceTree = "<group>";
+		};
+		9DE63364243AE2CF002F56FC /* view */ = {
+			isa = PBXGroup;
+			children = (
+				9DE63365243AE2CF002F56FC /* FocusView.swift */,
+				9DE63366243AE2CF002F56FC /* PreviewView.swift */,
+				9DE63367243AE2CF002F56FC /* CaptureView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9DE6334F243A2539002F56FC /* RNTCamera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9DE63359243A2539002F56FC /* Build configuration list for PBXNativeTarget "RNTCamera" */;
+			buildPhases = (
+				9DE6334C243A2539002F56FC /* Sources */,
+				9DE6334D243A2539002F56FC /* Frameworks */,
+				9DE6334E243A2539002F56FC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNTCamera;
+			productName = RNTCamera;
+			productReference = 9DE63350243A2539002F56FC /* libRNTCamera.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9DE63348243A2539002F56FC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = finstao;
+				TargetAttributes = {
+					9DE6334F243A2539002F56FC = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 9DE6334B243A2539002F56FC /* Build configuration list for PBXProject "RNTCamera" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9DE63347243A2539002F56FC;
+			productRefGroup = 9DE63351243A2539002F56FC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9DE6334F243A2539002F56FC /* RNTCamera */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9DE6334C243A2539002F56FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DE6336A243AE2CF002F56FC /* CameraViewConfiguration.swift in Sources */,
+				9DE6336E243AE2CF002F56FC /* CameraView.swift in Sources */,
+				9DE63370243AE2CF002F56FC /* PreviewView.swift in Sources */,
+				9DE6336B243AE2CF002F56FC /* VideoQuality.swift in Sources */,
+				9DE6336C243AE2CF002F56FC /* CaptureMode.swift in Sources */,
+				9DE63369243AE2CF002F56FC /* CameraViewDelegate.swift in Sources */,
+				9DE6336F243AE2CF002F56FC /* FocusView.swift in Sources */,
+				9DE63355243A2539002F56FC /* RNTCamera.m in Sources */,
+				9DE6336D243AE2CF002F56FC /* CameraViewController.swift in Sources */,
+				9DE63371243AE2CF002F56FC /* CaptureView.swift in Sources */,
+				9DE63372243AE2CF002F56FC /* CameraManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9DE63357243A2539002F56FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9DE63358243A2539002F56FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9DE6335A243A2539002F56FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N276SVAZ33;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9DE6335B243A2539002F56FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N276SVAZ33;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9DE6334B243A2539002F56FC /* Build configuration list for PBXProject "RNTCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DE63357243A2539002F56FC /* Debug */,
+				9DE63358243A2539002F56FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9DE63359243A2539002F56FC /* Build configuration list for PBXNativeTarget "RNTCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DE6335A243A2539002F56FC /* Debug */,
+				9DE6335B243A2539002F56FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9DE63348243A2539002F56FC /* Project object */;
+}
