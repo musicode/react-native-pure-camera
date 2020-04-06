@@ -5,9 +5,7 @@ import AVFoundation
 // 支持拍照，录视频
 
 @objc public class CameraManager : NSObject {
-    
-    @objc public static let shared: CameraManager = CameraManager()
-    
+
     // 图片保存的目录
     var photoDir = ""
     
@@ -135,15 +133,7 @@ import AVFoundation
     //
     // MARK: - 回调
     //
-    
-    @objc public var onPermissionsGranted: (() -> Void)?
-    
-    @objc public var onPermissionsDenied: (() -> Void)?
-    
-    @objc public var onPermissionsNotGranted: (() -> Void)?
-    
-    var onDeviceReady: (() -> Void)?
-    
+
     var onFlashModeChange: (() -> Void)?
     
     var onCameraPositionChange: (() -> Void)?
@@ -179,53 +169,8 @@ import AVFoundation
 
 extension CameraManager {
     
-    // 申请权限
-    @objc public func requestPermissions() -> Bool {
-        
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            if !isDeviceReady {
-                prepare { error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    else {
-                        DispatchQueue.main.async {
-                            self.isDeviceReady = true
-                            self.onDeviceReady?()
-                        }
-                    }
-                }
-            }
-            return true
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                DispatchQueue.main.async {
-                    if granted {
-                        self.onPermissionsGranted?()
-                    }
-                    else {
-                        self.onPermissionsDenied?()
-                    }
-                }
-            }
-            break
-        default:
-            // 拒绝
-            break
-        }
-        
-        return false
-        
-    }
-    
     // 拍照
     func capturePhoto() {
-        
-        guard requestPermissions() else {
-            onPermissionsNotGranted?()
-            return
-        }
         
         if #available(iOS 10.0, *) {
             capturePhoto10()
@@ -238,12 +183,7 @@ extension CameraManager {
     
     // 录制视频
     func startRecordVideo() {
-        
-        guard requestPermissions() else {
-            onPermissionsNotGranted?()
-            return
-        }
-        
+     
         guard let output = videoOutput, !output.isRecording else {
             return
         }

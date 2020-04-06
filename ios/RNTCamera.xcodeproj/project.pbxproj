@@ -19,6 +19,10 @@
 		9DE63370243AE2CF002F56FC /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63366243AE2CF002F56FC /* PreviewView.swift */; };
 		9DE63371243AE2CF002F56FC /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63367243AE2CF002F56FC /* CaptureView.swift */; };
 		9DE63372243AE2CF002F56FC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63368243AE2CF002F56FC /* CameraManager.swift */; };
+		9DE63384243B00CB002F56FC /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6337F243B00CB002F56FC /* CircleView.swift */; };
+		9DE63385243B00CB002F56FC /* CircleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63380243B00CB002F56FC /* CircleLayer.swift */; };
+		9DE63386243B00CB002F56FC /* CircleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63381243B00CB002F56FC /* CircleViewDelegate.swift */; };
+		9DE63387243B00CB002F56FC /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63383243B00CB002F56FC /* SimpleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +53,10 @@
 		9DE63367243AE2CF002F56FC /* CaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
 		9DE63368243AE2CF002F56FC /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		9DE63373243AE344002F56FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9DE6337F243B00CB002F56FC /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		9DE63380243B00CB002F56FC /* CircleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLayer.swift; sourceTree = "<group>"; };
+		9DE63381243B00CB002F56FC /* CircleViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleViewDelegate.swift; sourceTree = "<group>"; };
+		9DE63383243B00CB002F56FC /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,8 @@
 				9DE63363243AE2CF002F56FC /* CameraView.swift */,
 				9DE63364243AE2CF002F56FC /* view */,
 				9DE63368243AE2CF002F56FC /* CameraManager.swift */,
+				9DE6337E243B00CB002F56FC /* CircleView */,
+				9DE63382243B00CB002F56FC /* SimpleButton */,
 			);
 			path = CameraView;
 			sourceTree = "<group>";
@@ -120,6 +130,24 @@
 				9DE63367243AE2CF002F56FC /* CaptureView.swift */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		9DE6337E243B00CB002F56FC /* CircleView */ = {
+			isa = PBXGroup;
+			children = (
+				9DE6337F243B00CB002F56FC /* CircleView.swift */,
+				9DE63380243B00CB002F56FC /* CircleLayer.swift */,
+				9DE63381243B00CB002F56FC /* CircleViewDelegate.swift */,
+			);
+			path = CircleView;
+			sourceTree = "<group>";
+		};
+		9DE63382243B00CB002F56FC /* SimpleButton */ = {
+			isa = PBXGroup;
+			children = (
+				9DE63383243B00CB002F56FC /* SimpleButton.swift */,
+			);
+			path = SimpleButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,8 +207,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DE63384243B00CB002F56FC /* CircleView.swift in Sources */,
 				9DE6336A243AE2CF002F56FC /* CameraViewConfiguration.swift in Sources */,
 				9DE6336E243AE2CF002F56FC /* CameraView.swift in Sources */,
+				9DE63386243B00CB002F56FC /* CircleViewDelegate.swift in Sources */,
 				9DE63370243AE2CF002F56FC /* PreviewView.swift in Sources */,
 				9DE6336B243AE2CF002F56FC /* VideoQuality.swift in Sources */,
 				9DE6336C243AE2CF002F56FC /* CaptureMode.swift in Sources */,
@@ -188,8 +218,10 @@
 				9DE6336F243AE2CF002F56FC /* FocusView.swift in Sources */,
 				9DE63355243A2539002F56FC /* RNTCamera.m in Sources */,
 				9DE6336D243AE2CF002F56FC /* CameraViewController.swift in Sources */,
+				9DE63385243B00CB002F56FC /* CircleLayer.swift in Sources */,
 				9DE63371243AE2CF002F56FC /* CaptureView.swift in Sources */,
 				9DE63372243AE2CF002F56FC /* CameraManager.swift in Sources */,
+				9DE63387243B00CB002F56FC /* SimpleButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

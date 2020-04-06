@@ -27,20 +27,9 @@ public class CameraViewController: UIViewController {
         cameraView.onRecordVideo = { videoPath, videoSize, videoDuration, photoPath, photoSize, photoWidth, photoHeight in
             self.delegate.cameraViewDidRecordVideo(self, videoPath: videoPath, videoSize: videoSize, videoDuration: videoDuration, photoPath: photoPath, photoSize: photoSize, photoWidth: photoWidth, photoHeight: photoHeight)
         }
-        cameraView.onPermissionsGranted = {
-            self.delegate.cameraViewDidPermissionsGranted(self)
-        }
-        cameraView.onPermissionsDenied = {
-            self.delegate.cameraViewDidPermissionsDenied(self)
-        }
-        cameraView.onPermissionsNotGranted = {
-            self.delegate.cameraViewDidPermissionsNotGranted(self)
-        }
         cameraView.onRecordDurationLessThanMinDuration = {
             self.delegate.cameraViewDidRecordDurationLessThanMinDuration(self)
         }
-        
-        cameraView.requestPermissions()
         
         view.backgroundColor = .black
         view.addSubview(cameraView)

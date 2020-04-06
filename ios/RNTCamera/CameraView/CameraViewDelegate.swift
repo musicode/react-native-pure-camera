@@ -14,15 +14,6 @@ public protocol CameraViewDelegate {
     
     // 录制视频时间太短
     func cameraViewDidRecordDurationLessThanMinDuration(_ viewController: CameraViewController)
-    
-    // 点击拍照或摄像按钮时，发现没权限
-    func cameraViewDidPermissionsNotGranted(_ viewController: CameraViewController)
-    
-    // 用户点击同意授权
-    func cameraViewDidPermissionsGranted(_ viewController: CameraViewController)
-    
-    // 用户点击拒绝授权
-    func cameraViewDidPermissionsDenied(_ viewController: CameraViewController)
 
 }
 
@@ -35,11 +26,5 @@ public extension CameraViewDelegate {
     func cameraViewDidRecordVideo(_ viewController: CameraViewController, videoPath: String, videoSize: Int, videoDuration: Int, photoPath: String, photoSize: Int, photoWidth: Int, photoHeight: Int) { }
 
     func cameraViewDidRecordDurationLessThanMinDuration(_ viewController: CameraViewController) { }
-    
-    func cameraViewDidPermissionsNotGranted(_ viewController: CameraViewController) { }
-    
-    func cameraViewDidPermissionsGranted(_ viewController: CameraViewController) { }
-    
-    func cameraViewDidPermissionsDenied(_ viewController: CameraViewController) { }
-    
+ 
 }

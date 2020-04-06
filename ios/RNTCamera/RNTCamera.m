@@ -5,22 +5,6 @@
 
 RCT_EXPORT_MODULE(RNTCamera);
 
-RCT_EXPORT_METHOD(requestPermissions:(RCTPromiseResolveBlock)resolve
-                    reject:(RCTPromiseRejectBlock)reject) {
-    
-    
-    CameraManager.shared.onPermissionsDenied = ^ () {
-        reject(@"2", @"you denied the requested permissions.", nil);
-    };
-
-    CameraManager.shared.onPermissionsNotGranted = ^ () {
-        reject(@"1", @"has no permissions.", nil);
-    };
-
-    [CameraManager.shared requestPermissions];
-    
-}
-
 RCT_EXPORT_METHOD(open:(NSDictionary*)options
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject) {
