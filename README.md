@@ -1,23 +1,23 @@
-# react-native-pure-photo-picker
+# react-native-pure-camera
 
-This is a module which help you pick an image.
+This is a module which help you take photo or take video.
 
 ## Installation
 
 ```
-npm i react-native-pure-photo-picker
+npm i react-native-pure-camera
 // link below 0.60
-react-native link react-native-pure-photo-picker
+react-native link react-native-pure-camera
 ```
 
 ## Setup
 
 ### iOS
 
-Add `NSPhotoLibraryUsageDescription` in your `ios/${ProjectName}/Info.plist`:
+Add `NSCameraUsageDescription` in your `ios/${ProjectName}/Info.plist`:
 
 ```
-<key>NSPhotoLibraryUsageDescription</key>
+<key>NSCameraUsageDescription</key>
 <string>balabala</string>
 ```
 
@@ -34,84 +34,49 @@ allprojects {
 }
 ```
 
-Modify `MainApplication.java`
-
-```java
-
-import com.github.musicode.photopicker.RNTPhotoPickerModule;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-import kotlin.jvm.functions.Function5;
-
-public class MainApplication extends Application implements ReactApplication {
-
-  @Override
-  public void onCreate() {
-    super.onCreate();
-
-    RNTPhotoPickerModule.setImageLoader(
-      new Function5<ImageView, String, Integer, Integer, Function1, Unit>() {
-        @Override
-        public Unit invoke(ImageView imageView, String url, Integer loading, Integer error, Function1 onComplete) {
-
-          // add your image loader here
-
-          return null;
-        }
-      }
-    );
-  }
-
-}
-```
-
 ## Usage
 
 ```js
-import PhotoPicker from 'react-native-pure-photo-picker'
+import camera from 'react-native-pure-camera'
 
-// 单独判断是否获取到了权限，如果没有，会弹出用户授权对话框
-PhotoPicker.requestPermissions()
-.then(() => {
-  // 获取了权限
-})
-.catch(error => {
-  let { code } = error
-  // 1: has no permissions
-  // 2: denied the requested permissions
-  // 3: external storage is not writable
-})
+// At first, make sure you have the permissions.
+// ios: camera
+// android: camera audio_record
 
-// 包含获取权限 + 打开选择图片的界面
-PhotoPicker.open({
+// If you don't have these permissions, you can't call open method.
 
-  maxSelectCount: 9,
-  countable: true,
-  rawButtonVisible: true,
+camera.open({
 
-  // filter image by width and height
-  // optional
-  imageMinWidth: 100,
-  // optional
-  imageMinHeight: 100,
+  // photo: take photo only
+  // video: take video only
+  // photo_video: take photo by tap, take video by long press
+  // default value: 'photo_video'
+  captureMode: 'photo|video|photo_video',
 
-  // optional
-  submitButtonTitle: '确定',
-  // optional
-  cancelButtonTitle: '取消',
-  // optional
-  rawButtonTitle: '原图',
-})
-.then(file => {
-  let { path, size, width, height, isRaw } = file
+  // the text above the take button
+  // default value: ''
+  guideLabelTitle: '轻触拍照，按住摄像',
+
+  // video min duration in milliseconds
+  // default value: 1000
+  videoMinDuration: 1000,
+
+  // video max duration in milliseconds
+  // default value: 10000
+  videoMaxDuration: 10000,
 
 })
-.catch(error => {
-  let { code } = error
-  // -1: click cancel button
-  // 1: has no permissions
-  // 2: denied the requested permissions
-  // 3: external storage is not writable
+.then(data => {
+
+  // if you take video, data.video is the output video.
+  data.video
+
+  // if you take photo, data.photo is the output photo.
+  // if you take video, data.photo is the first frame of the video
+  data.photo
+
+})
+.catch(() => {
+  // click cancel button
 })
 ```

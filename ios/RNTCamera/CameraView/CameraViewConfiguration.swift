@@ -17,7 +17,7 @@ import AVFoundation
     @objc public var guideLabelFadeOutDelay: TimeInterval = 3
     
     // 引导文本
-    @objc public var guideLabelTitle = "轻触拍照，按住摄像"
+    @objc public var guideLabelTitle = ""
     
     
     

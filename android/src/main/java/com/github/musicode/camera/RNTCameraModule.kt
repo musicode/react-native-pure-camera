@@ -50,6 +50,7 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
         val callback = object: CameraViewCallback {
             override fun onExit(activity: Activity) {
                 activity.finish()
+                promise.reject("-1", "cancel")
             }
 
             override fun onCapturePhoto(
@@ -59,6 +60,8 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
                     photoWidth: Int,
                     photoHeight: Int
             ) {
+
+                activity.finish()
 
                 val map = Arguments.createMap()
 
@@ -84,6 +87,8 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
                     photoWidth: Int,
                     photoHeight: Int
             ) {
+
+                activity.finish()
 
                 val map = Arguments.createMap()
 

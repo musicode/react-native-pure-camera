@@ -10,7 +10,7 @@
 
 - (void)cameraViewDidExit:(CameraViewController *)viewController {
     [viewController dismissViewControllerAnimated:true completion:nil];
-    self.reject(@"-1", @"exit", nil);
+    self.reject(@"-1", @"cancel", nil);
 }
 
 - (void)cameraViewDidRecordDurationLessThanMinDuration:(CameraViewController *)viewController {
