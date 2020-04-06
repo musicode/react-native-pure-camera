@@ -125,11 +125,7 @@ import AVFoundation
     
     // 视频是否正在录制
     var isVideoRecording = false
-    
-    // 是否准备就绪
-    var isDeviceReady = false
-    
-    
+
     //
     // MARK: - 回调
     //

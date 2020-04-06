@@ -40,8 +40,8 @@ allprojects {
 import camera from 'react-native-pure-camera'
 
 // At first, make sure you have the permissions.
-// ios: camera
-// android: camera audio_record
+// ios: CAMERA
+// android: CAMERA RECORD_AUDIO
 
 // If you don't have these permissions, you can't call open method.
 
