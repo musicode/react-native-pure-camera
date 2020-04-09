@@ -125,6 +125,9 @@ import AVFoundation
     
     // 视频是否正在录制
     var isVideoRecording = false
+    
+    // 是否忙于生成照片或视频
+    var isBusy = false
 
     //
     // MARK: - 回调
@@ -168,6 +171,13 @@ extension CameraManager {
     // 拍照
     func capturePhoto() {
         
+        guard !isBusy else {
+            return
+        }
+        
+        // 此时开始等照片的回调
+        isBusy = true
+        
         if #available(iOS 10.0, *) {
             capturePhoto10()
         }
@@ -180,7 +190,7 @@ extension CameraManager {
     // 录制视频
     func startRecordVideo() {
      
-        guard let output = videoOutput, !output.isRecording else {
+        guard let output = videoOutput, !output.isRecording, !isBusy else {
             return
         }
         
@@ -215,9 +225,12 @@ extension CameraManager {
     
     func stopRecordVideo() {
         
-        guard let output = videoOutput, output.isRecording else {
+        guard let output = videoOutput, output.isRecording, !isBusy else {
             return
         }
+        
+        // 此时开始等视频的回调
+        isBusy = true
         
         output.stopRecording()
         
@@ -492,6 +505,8 @@ extension CameraManager: AVCapturePhotoCaptureDelegate {
                      error: Error?
         ) {
         
+        isBusy = false
+        
         if let error = error {
             onFinishCapturePhoto?(nil, error)
         }
@@ -513,6 +528,7 @@ extension CameraManager: AVCaptureFileOutputRecordingDelegate {
     
     public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         
+        isBusy = false
         isVideoRecording = false
         
         if let taskId = backgroundRecordingId {

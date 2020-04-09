@@ -48,6 +48,8 @@ public class CameraView: UIView {
     private var cameraManager = CameraManager()
     
     private var progressAnimation: CABasicAnimation!
+    
+    private var isGuideLabelFadingOut = false
    
     public convenience init(configuration: CameraViewConfiguration) {
         self.init()
@@ -518,7 +520,7 @@ extension CameraView {
     
     private func stopRecordVideo() {
         
-        guard cameraManager.isVideoRecording else {
+        guard !cameraManager.isBusy, cameraManager.isVideoRecording else {
             return
         }
         
@@ -546,6 +548,12 @@ extension CameraView {
     
     @objc private func onGuideLabelFadeOut() {
         
+        if isGuideLabelFadingOut || guideLabel.isHidden {
+            return
+        }
+
+        isGuideLabelFadingOut = true
+        
         // 引导文字淡出消失
         UIView.animate(
             withDuration: 1,
@@ -555,7 +563,8 @@ extension CameraView {
                 self.guideLabel.alpha = 0
             },
             completion: { _ in
-                 self.guideLabel.isHidden = true
+                self.guideLabel.isHidden = true
+                self.isGuideLabelFadingOut = false
             }
         )
 
@@ -570,37 +579,63 @@ extension CameraView {
 extension CameraView: CircleViewDelegate {
 
     public func circleViewDidLongPressStart(_ circleView: CircleView) {
-        if circleView == captureButton && configuration.captureMode != .photo {
+        if circleView != captureButton {
+            return
+        }
+        if configuration.captureMode != .photo {
             // 长按触发录制视频
             startRecordVideo()
         }
     }
     
     public func circleViewDidLongPressEnd(_ circleView: CircleView) {
-        if circleView == captureButton {
-            stopRecordVideo()
+        if circleView != captureButton {
+            return
         }
+        stopRecordVideo()
     }
     
     public func circleViewDidTouchDown(_ circleView: CircleView) {
-        if circleView == captureButton {
-            circleView.centerColor = configuration.captureButtonCenterColorPressed
-            circleView.setNeedsDisplay()
+        
+        if circleView != captureButton {
+            return
         }
+        
+        if cameraManager.isBusy {
+            return
+        }
+        
+        circleView.centerColor = configuration.captureButtonCenterColorPressed
+        circleView.setNeedsDisplay()
+        
+        // 如果提示文字还在显示，此时应直接淡出
+        // 无需等时间到了再开始动画
+        if configuration.guideLabelFadeOutDelay > 0 {
+            onGuideLabelFadeOut()
+        }
+        
     }
     
     public func circleViewDidTouchEnter(_ circleView: CircleView) {
-        if circleView == captureButton {
-            circleView.centerColor = configuration.captureButtonCenterColorPressed
-            circleView.setNeedsDisplay()
+        if circleView != captureButton {
+            return
         }
+        if cameraManager.isBusy {
+            return
+        }
+        circleView.centerColor = configuration.captureButtonCenterColorPressed
+        circleView.setNeedsDisplay()
     }
     
     public func circleViewDidTouchLeave(_ circleView: CircleView) {
-        if circleView == captureButton {
-            circleView.centerColor = configuration.captureButtonCenterColorNormal
-            circleView.setNeedsDisplay()
+        if circleView != captureButton {
+            return
         }
+        if cameraManager.isBusy {
+            return
+        }
+        circleView.centerColor = configuration.captureButtonCenterColorNormal
+        circleView.setNeedsDisplay()
     }
     
     public func circleViewDidTouchUp(_ circleView: CircleView, _ inside: Bool, _ isLongPress: Bool) {
@@ -610,11 +645,14 @@ extension CameraView: CircleViewDelegate {
             circleView.setNeedsDisplay()
         }
         
-        guard inside, !isLongPress else {
+        if !inside || isLongPress {
             return
         }
         
         if circleView == captureButton {
+            if cameraManager.isBusy {
+                return
+            }
             // 纯视频拍摄需要长按
             if configuration.captureMode != .video {
                 cameraManager.capturePhoto()
