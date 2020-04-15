@@ -70,6 +70,9 @@ public class CameraView: UIView {
         
         backgroundColor = .clear
         
+        addCaptureView()
+        addPreviewView()
+        
         cameraManager.onFlashModeChange = {
             
             switch self.cameraManager.flashMode {
@@ -115,13 +118,17 @@ public class CameraView: UIView {
             
         }
         
-        addCaptureView()
-        addPreviewView()
-        
-        captureView.bind(
-            session: cameraManager.captureSession,
-            orientation: cameraManager.getVideoOrientation(deviceOrientation: cameraManager.deviceOrientation)
-        )
+        cameraManager.prepare { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.captureView.bind(
+                    session: self.cameraManager.captureSession,
+                    orientation: self.cameraManager.getVideoOrientation(deviceOrientation: self.cameraManager.deviceOrientation)
+                )
+            }
+        }
         
     }
     
@@ -235,10 +242,10 @@ extension CameraView {
         addSubview(captureView)
         
         addConstraints([
-            NSLayoutConstraint(item: captureView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: captureView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: captureView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: captureView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: captureView!, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: captureView!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: captureView!, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: captureView!, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 0),
         ])
         
         addFlipButton()
@@ -247,7 +254,7 @@ extension CameraView {
         addCaptureButton()
         addExitButton()
         addGuideLabel()
-
+        
     }
     
     private func addFlipButton() {

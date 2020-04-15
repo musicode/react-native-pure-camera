@@ -385,7 +385,7 @@ extension CameraManager {
         
     }
     
-    private func prepare(completionHandler: @escaping (Error?) -> Void) {
+    func prepare(completionHandler: @escaping (Error?) -> Void) {
         
         // 枚举音视频设备
         func configureCaptureDevices() throws {
