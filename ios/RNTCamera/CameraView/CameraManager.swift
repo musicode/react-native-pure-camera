@@ -293,18 +293,21 @@ extension CameraManager {
         guard let device = currentCamera else {
             return
         }
-        
-        if #available(iOS 10.0, *) {
-            if let output = photoOutput {
-                if (output as! AVCapturePhotoOutput).supportedFlashModes.contains(flashMode) {
-                    self.flashMode = flashMode
+            
+        // xcode 12 有 bug，加上模拟器判断
+        #if !targetEnvironment(simulator)
+            if #available(iOS 10.0, *) {
+                if let output = photoOutput {
+                    if (output as! AVCapturePhotoOutput).supportedFlashModes.contains(flashMode) {
+                        self.flashMode = flashMode
+                    }
                 }
+                return
             }
-        }
-        else {
-            if device.isFlashModeSupported(flashMode) {
-                self.flashMode = flashMode
-            }
+        #endif
+        
+        if device.isFlashModeSupported(flashMode) {
+            self.flashMode = flashMode
         }
         
     }
