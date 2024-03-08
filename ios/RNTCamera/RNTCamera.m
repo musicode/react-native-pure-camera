@@ -84,7 +84,7 @@ RCT_EXPORT_METHOD(open:(NSDictionary*)options
     
     int videoMaxDuration = [RCTConvert int:options[@"videoMaxDuration"]];
     if (videoMaxDuration > 0) {
-        configuration.videoMinDuration = videoMaxDuration;
+        configuration.videoMaxDuration = videoMaxDuration;
     }
 
     controller.delegate = self;
