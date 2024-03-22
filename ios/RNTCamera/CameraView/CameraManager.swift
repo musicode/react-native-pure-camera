@@ -814,16 +814,12 @@ extension CameraManager {
             try? fileManager.createDirectory(atPath: dirname, withIntermediateDirectories: true, attributes: nil)
         }
         
-        let format = DateFormatter()
-        format.dateFormat = "yyyy_MM_dd_HH_mm_ss"
-        
-        let filename = "\(format.string(from: Date()))\(extname)"
-        
-        if dirname.hasSuffix("/") {
-            return dirname + filename
+        var dirName = dirname
+        if !dirName.hasSuffix("/") {
+            dirName += "/"
         }
         
-        return "\(dirname)/\(filename)"
+        return dirName + UUID().uuidString + extname
         
     }
     
