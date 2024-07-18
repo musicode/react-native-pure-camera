@@ -39,8 +39,6 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
 
         if (options.hasKey("photoBase64Enabled")) {
             configuration.photoBase64Enabled = options.getBoolean("photoBase64Enabled")
-        } else {
-            configuration.photoBase64Enabled = false
         }
 
         if (options.hasKey("guideLabelTitle")) {
@@ -52,11 +50,17 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
         }
 
         if (options.hasKey("videoMinDuration")) {
-            configuration.videoMinDuration = options.getInt("videoMinDuration").toLong()
+            val duration = options.getInt("videoMinDuration").toLong()
+            if (duration > 0) {
+                configuration.videoMinDuration = duration
+            }
         }
 
         if (options.hasKey("videoMaxDuration")) {
-            configuration.videoMaxDuration = options.getInt("videoMaxDuration").toLong()
+            val duration = options.getInt("videoMaxDuration").toLong()
+            if (duration > 0) {
+                configuration.videoMaxDuration = duration
+            }
         }
 
         val callback = object: CameraViewCallback {

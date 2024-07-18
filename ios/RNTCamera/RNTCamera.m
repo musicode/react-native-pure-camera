@@ -79,7 +79,11 @@ RCT_EXPORT_METHOD(open:(NSDictionary*)options
         configuration.guideLabelTitle = guideLabelTitle;
     }
     
-    configuration.photoBase64Enabled = [RCTConvert BOOL:options[@"photoBase64Enabled"]];
+    BOOL photoBase64Enabled = [RCTConvert BOOL:options[@"photoBase64Enabled"]];
+    if (photoBase64Enabled) {
+        configuration.photoBase64Enabled = photoBase64Enabled;
+    }
+    
     
     int videoMinDuration = [RCTConvert int:options[@"videoMinDuration"]];
     if (videoMinDuration > 0) {

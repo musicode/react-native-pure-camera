@@ -134,7 +134,7 @@ import AVFoundation
     @objc public var photoDir = NSTemporaryDirectory()
     
     // 图片是否需要返回 base64
-    @objc public var photoBase64Enabled = true
+    @objc public var photoBase64Enabled = false
     
     // 视频保存的目录
     @objc public var videoDir = NSTemporaryDirectory()

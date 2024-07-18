@@ -2,9 +2,9 @@ import Foundation
 
 @objc public class Video: NSObject {
     
-    public var path: String
-    public var size: Int
-    public var duration: Int
+    @objc public var path: String
+    @objc public var size: Int
+    @objc public var duration: Int
     
     public init(path: String, size: Int, duration: Int) {
         self.path = path
