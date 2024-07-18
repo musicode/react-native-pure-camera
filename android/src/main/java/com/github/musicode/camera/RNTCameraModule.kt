@@ -7,6 +7,8 @@ import com.github.herokotlin.cameraview.CameraViewActivity
 import com.github.herokotlin.cameraview.CameraViewCallback
 import com.github.herokotlin.cameraview.CameraViewConfiguration
 import com.github.herokotlin.cameraview.enum.CaptureMode
+import com.github.herokotlin.cameraview.model.Photo
+import com.github.herokotlin.cameraview.model.Video
 
 class RNTCameraModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -35,6 +37,16 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
             }
         }
 
+        if (options.hasKey("photoBase64Enabled")) {
+            configuration.photoBase64Enabled = options.getBoolean("photoBase64Enabled")
+        } else {
+            configuration.photoBase64Enabled = false
+        }
+
+        if (options.hasKey("guideLabelTitle")) {
+            configuration.guideLabelTitle = options.getString("guideLabelTitle") as String
+        }
+
         if (options.hasKey("guideLabelTitle")) {
             configuration.guideLabelTitle = options.getString("guideLabelTitle") as String
         }
@@ -55,23 +67,21 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
 
             override fun onCapturePhoto(
                     activity: Activity,
-                    photoPath: String,
-                    photoSize: Long,
-                    photoWidth: Int,
-                    photoHeight: Int
+                    photo: Photo
             ) {
 
                 activity.finish()
 
                 val map = Arguments.createMap()
 
-                val photo = Arguments.createMap()
-                photo.putString("path", photoPath)
-                photo.putInt("size", photoSize.toInt())
-                photo.putInt("width", photoWidth)
-                photo.putInt("height", photoHeight)
+                val photoData = Arguments.createMap()
+                photoData.putString("path", photo.path)
+                photoData.putString("base64", photo.base64)
+                photoData.putInt("size", photo.size.toInt())
+                photoData.putInt("width", photo.width)
+                photoData.putInt("height", photo.height)
 
-                map.putMap("photo", photo)
+                map.putMap("photo", photoData)
 
                 promise.resolve(map)
 
@@ -79,32 +89,28 @@ class RNTCameraModule(private val reactContext: ReactApplicationContext) : React
 
             override fun onRecordVideo(
                     activity: Activity,
-                    videoPath: String,
-                    videoSize: Long,
-                    videoDuration: Int,
-                    photoPath: String,
-                    photoSize: Long,
-                    photoWidth: Int,
-                    photoHeight: Int
+                    video: Video,
+                    photo: Photo
             ) {
 
                 activity.finish()
 
                 val map = Arguments.createMap()
 
-                val video = Arguments.createMap()
-                video.putString("path", videoPath)
-                video.putInt("size", videoSize.toInt())
-                video.putInt("duration", videoDuration)
+                val videoData = Arguments.createMap()
+                videoData.putString("path", video.path)
+                videoData.putInt("size", video.size.toInt())
+                videoData.putInt("duration", video.duration)
 
-                val photo = Arguments.createMap()
-                photo.putString("path", photoPath)
-                photo.putInt("size", photoSize.toInt())
-                photo.putInt("width", photoWidth)
-                photo.putInt("height", photoHeight)
+                val photoData = Arguments.createMap()
+                photoData.putString("path", photo.path)
+                photoData.putString("base64", photo.base64)
+                photoData.putInt("size", photo.size.toInt())
+                photoData.putInt("width", photo.width)
+                photoData.putInt("height", photo.height)
 
-                map.putMap("video", video)
-                map.putMap("photo", photo)
+                map.putMap("video", videoData)
+                map.putMap("photo", photoData)
 
                 promise.resolve(map)
 

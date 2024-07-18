@@ -5,9 +5,9 @@ public class CameraView: UIView {
     
     var onExit: (() -> Void)?
     
-    var onCapturePhoto: ((String, Int, Int, Int) -> Void)?
+    var onCapturePhoto: ((Photo) -> Void)?
     
-    var onRecordVideo: ((String, Int, Int, String, Int, Int, Int) -> Void)?
+    var onRecordVideo: ((Video, Photo) -> Void)?
     
     var onRecordDurationLessThanMinDuration: (() -> Void)?
     
@@ -58,6 +58,7 @@ public class CameraView: UIView {
         self.captureView = CaptureView(configuration: configuration)
         
         cameraManager.photoDir = configuration.photoDir
+        cameraManager.photoBase64Enabled = configuration.photoBase64Enabled
         cameraManager.videoDir = configuration.videoDir
         cameraManager.videoQuality = configuration.videoQuality
         cameraManager.videoMinDuration = configuration.videoMinDuration
@@ -478,8 +479,8 @@ extension CameraView {
         
         if let photo = cameraManager.photo {
             // 保存图片
-            cameraManager.saveToDisk(image: photo) { path, size in
-                self.onCapturePhoto?(path, size, Int(photo.size.width), Int(photo.size.height))
+            if let photoData = cameraManager.saveToDisk(image: photo, quality: 1) {
+                self.onCapturePhoto?(photoData)
             }
         }
         else if let photo = cameraManager.getVideoFirstFrame(videoPath: cameraManager.videoPath) {
@@ -487,15 +488,10 @@ extension CameraView {
                 return
             }
             // 保存视频截图
-            cameraManager.saveToDisk(image: photo) { path, size in
+            if let photoData = cameraManager.saveToDisk(image: photo, quality: 0.8) {
                 self.onRecordVideo?(
-                    cameraManager.videoPath,
-                    videoData.length,
-                    cameraManager.videoDuration,
-                    path,
-                    size,
-                    Int(photo.size.width),
-                    Int(photo.size.height)
+                    Video(path: cameraManager.videoPath, size: videoData.length, duration: cameraManager.videoDuration),
+                    photoData
                 )
             }
         }

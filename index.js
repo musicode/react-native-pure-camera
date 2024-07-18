@@ -8,6 +8,7 @@ export default {
   /**
    * @param {Object} options
    * @property {string} options.captureMode
+   * @property {string} options.photoBase64Enabled
    * @property {string} options.guideLabelTitle
    * @property {number} options.videoMinDuration
    * @property {number} options.videoMaxDuration

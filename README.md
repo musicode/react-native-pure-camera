@@ -53,6 +53,8 @@ camera.open({
   // default value: 'photo_video'
   captureMode: 'photo|video|photo_video',
 
+  photoBase64Enabled: true,
+
   // the text above the take button
   // default value: ''
   guideLabelTitle: '轻触拍照，按住摄像',

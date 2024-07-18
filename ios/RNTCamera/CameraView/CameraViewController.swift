@@ -21,11 +21,11 @@ public class CameraViewController: UIViewController {
         cameraView.onExit = {
             self.delegate.cameraViewDidExit(self)
         }
-        cameraView.onCapturePhoto = { photoPath, photoSize, photoWidth, photoHeight in
-            self.delegate.cameraViewDidCapturePhoto(self, photoPath: photoPath, photoSize: photoSize, photoWidth: photoWidth, photoHeight: photoHeight)
+        cameraView.onCapturePhoto = { photo in
+            self.delegate.cameraViewDidCapturePhoto(self, photo: photo)
         }
-        cameraView.onRecordVideo = { videoPath, videoSize, videoDuration, photoPath, photoSize, photoWidth, photoHeight in
-            self.delegate.cameraViewDidRecordVideo(self, videoPath: videoPath, videoSize: videoSize, videoDuration: videoDuration, photoPath: photoPath, photoSize: photoSize, photoWidth: photoWidth, photoHeight: photoHeight)
+        cameraView.onRecordVideo = { video, photo in
+            self.delegate.cameraViewDidRecordVideo(self, video: video, photo: photo)
         }
         cameraView.onRecordDurationLessThanMinDuration = {
             self.delegate.cameraViewDidRecordDurationLessThanMinDuration(self)

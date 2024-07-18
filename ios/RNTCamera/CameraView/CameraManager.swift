@@ -9,6 +9,9 @@ import AVFoundation
     // 图片保存的目录
     var photoDir = ""
     
+    // 图片是否需要 base64
+    var photoBase64Enabled = false
+    
     // 视频保存的目录
     var videoDir = ""
     
@@ -795,14 +798,20 @@ extension CameraManager {
     }
     
     // 把图片保存到磁盘
-    func saveToDisk(image: UIImage, callback: (String, Int) -> Void) {
+    func saveToDisk(image: UIImage, quality: CGFloat) -> Photo? {
 
-        if let imageData = image.jpegData(compressionQuality: 1) as NSData? {
-            let filePath = getFilePath(dirname: photoDir, extname: ".jpeg")
+        if let imageData = image.jpegData(compressionQuality: quality) as NSData? {
+            let filePath = getFilePath(dirname: photoDir, extname: ".jpg")
             if imageData.write(toFile: filePath, atomically: true) {
-                callback(filePath, imageData.length)
+                var base64 = ""
+                if photoBase64Enabled {
+                    base64 = imageData.base64EncodedString()
+                }
+                return Photo(path: filePath, base64: base64, size: imageData.length, width: Int(image.size.width), height: Int(image.size.height))
             }
         }
+        
+        return nil
         
     }
     

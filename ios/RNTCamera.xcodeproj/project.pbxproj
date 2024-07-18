@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B7E338A2C49154600740E4A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E33882C49154600740E4A /* Photo.swift */; };
+		8B7E338B2C49154600740E4A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E33892C49154600740E4A /* Video.swift */; };
 		9DE63355243A2539002F56FC /* RNTCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE63354243A2539002F56FC /* RNTCamera.m */; };
 		9DE63356243A2539002F56FC /* RNTCamera.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9DE63353243A2539002F56FC /* RNTCamera.h */; };
 		9DE63369243AE2CF002F56FC /* CameraViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE6335D243AE2CF002F56FC /* CameraViewDelegate.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B7E33882C49154600740E4A /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		8B7E33892C49154600740E4A /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		9DE63350243A2539002F56FC /* libRNTCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTCamera.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE63353243A2539002F56FC /* RNTCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTCamera.h; sourceTree = "<group>"; };
 		9DE63354243A2539002F56FC /* RNTCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTCamera.m; sourceTree = "<group>"; };
@@ -70,6 +74,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B7E33872C49154600740E4A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				8B7E33882C49154600740E4A /* Photo.swift */,
+				8B7E33892C49154600740E4A /* Video.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		9DE63347243A2539002F56FC = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +113,7 @@
 		9DE6335C243AE2CF002F56FC /* CameraView */ = {
 			isa = PBXGroup;
 			children = (
+				8B7E33872C49154600740E4A /* model */,
 				9DE6335D243AE2CF002F56FC /* CameraViewDelegate.swift */,
 				9DE6335E243AE2CF002F56FC /* CameraViewConfiguration.swift */,
 				9DE6335F243AE2CF002F56FC /* enum */,
@@ -207,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B7E338A2C49154600740E4A /* Photo.swift in Sources */,
 				9DE63384243B00CB002F56FC /* CircleView.swift in Sources */,
 				9DE6336A243AE2CF002F56FC /* CameraViewConfiguration.swift in Sources */,
 				9DE6336E243AE2CF002F56FC /* CameraView.swift in Sources */,
@@ -217,6 +232,7 @@
 				9DE63369243AE2CF002F56FC /* CameraViewDelegate.swift in Sources */,
 				9DE6336F243AE2CF002F56FC /* FocusView.swift in Sources */,
 				9DE63355243A2539002F56FC /* RNTCamera.m in Sources */,
+				8B7E338B2C49154600740E4A /* Video.swift in Sources */,
 				9DE6336D243AE2CF002F56FC /* CameraViewController.swift in Sources */,
 				9DE63385243B00CB002F56FC /* CircleLayer.swift in Sources */,
 				9DE63371243AE2CF002F56FC /* CaptureView.swift in Sources */,
@@ -349,6 +365,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -364,6 +381,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

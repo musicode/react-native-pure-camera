@@ -17,31 +17,33 @@
     
 }
 
-- (void)cameraViewDidCapturePhoto:(CameraViewController *)viewController photoPath:(NSString *)photoPath photoSize:(NSInteger)photoSize photoWidth:(NSInteger)photoWidth photoHeight:(NSInteger)photoHeight {
+- (void)cameraViewDidCapturePhoto:(CameraViewController *)viewController photo:(Photo *)photo {
     [viewController dismissViewControllerAnimated:true completion:nil];
     self.resolve(@{
         @"photo": @{
-                @"path": photoPath,
-                @"size": @(photoSize),
-                @"width": @(photoWidth),
-                @"height": @(photoHeight),
+            @"path": photo.path,
+            @"base64": photo.base64,
+            @"size": @(photo.size),
+            @"width": @(photo.width),
+            @"height": @(photo.height),
         }
     });
 }
 
-- (void)cameraViewDidRecordVideo:(CameraViewController *)viewController videoPath:(NSString *)videoPath videoSize:(NSInteger)videoSize videoDuration:(NSInteger)videoDuration photoPath:(NSString *)photoPath photoSize:(NSInteger)photoSize photoWidth:(NSInteger)photoWidth photoHeight:(NSInteger)photoHeight {
+- (void)cameraViewDidRecordVideo:(CameraViewController *)viewController video:(Video *)video photo:(Photo *)photo {
     [viewController dismissViewControllerAnimated:true completion:nil];
     self.resolve(@{
         @"video": @{
-                @"path": videoPath,
-                @"size": @(videoSize),
-                @"duration": @(videoDuration),
+                @"path": video.path,
+                @"size": @(video.size),
+                @"duration": @(video.duration),
         },
         @"photo": @{
-                @"path": photoPath,
-                @"size": @(photoSize),
-                @"width": @(photoWidth),
-                @"height": @(photoHeight),
+            @"path": photo.path,
+            @"base64": photo.base64,
+            @"size": @(photo.size),
+            @"width": @(photo.width),
+            @"height": @(photo.height),
         }
     });
 }
@@ -76,6 +78,8 @@ RCT_EXPORT_METHOD(open:(NSDictionary*)options
     if (guideLabelTitle != nil) {
         configuration.guideLabelTitle = guideLabelTitle;
     }
+    
+    configuration.photoBase64Enabled = [RCTConvert BOOL:options[@"photoBase64Enabled"]];
     
     int videoMinDuration = [RCTConvert int:options[@"videoMinDuration"]];
     if (videoMinDuration > 0) {
